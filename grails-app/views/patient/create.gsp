@@ -1,38 +1,34 @@
+<%@ page import="edu.harvard.Patient" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'patient.label', default: 'Patient')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#create-patient" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
+
+<head>
+	<meta name="layout" content="kickstart" />
+	<g:set var="entityName" value="${message(code: 'patient.label', default: 'Patient')}" />
+	<title><g:message code="default.create.label" args="[entityName]" /></title>
+</head>
+
+<body>
+
+	<section id="create-patient" class="first">
+
+		<g:hasErrors bean="${patientInstance}">
+		<div class="alert alert-danger">
+			<g:renderErrors bean="${patientInstance}" as="list" />
 		</div>
-		<div id="create-patient" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="${patientInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${patientInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
-			<g:form url="[resource:patientInstance, action:'save']" >
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
+		</g:hasErrors>
+
+		<g:form action="save" class="form-horizontal" role="form" >
+			<g:render template="form"/>
+
+			<div class="form-actions margin-top-medium">
+				<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+	            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+			</div>
+		</g:form>
+
+	</section>
+
+</body>
+
 </html>

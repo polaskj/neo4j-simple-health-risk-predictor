@@ -100,7 +100,7 @@ grails.project.dependency.resolution = {
 //         compile ':cloud-support:1.0.8'
          //compile ':webxml:1.4.1'
 		 compile ":scaffolding:2.0.0"
-		 //compile ":kickstart-with-bootstrap:1.1.0"
+		 compile ":kickstart-with-bootstrap:1.1.0"
 		 
 		 
      }
