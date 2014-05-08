@@ -135,14 +135,17 @@ RETURN others
 		//response.contentType = "text/plain"
 		def diseaseList = Disease.cypherStatic("""
 START me=node(${params.id})
-MATCH me-[:symptoms]->commonSymptom<-[:symptoms]-others-[:diseases]-dis
+MATCH me-[:symptoms]->commonSymptom,
+commonSymptom<-[:symptoms]-others-[:diseases]-dis
+WITH dis, count(*) AS numInstances
+ORDER BY numInstances, dis.percentSurvival DESC LIMIT 10
 RETURN dis
          """).collect { Disease.createInstanceForNode(it.dis)}
 
 
 		//		 respond Talk.list(params), model:[talkInstanceCount: Talk.count()]
 		//		render (view:'/talk/index', model:[talkInstanceList:talks,talkInstanceCount: Talk.count()])
-		render diseaseList
+		render (view:'/disease/index', model:[diseaseInstanceList:diseaseList,diseaseInstanceCount: diseaseList.size()])
 	}
 	//Answers the question: Find top 5 hereditary diseases which are deadly (2 degrees)
 	def likelyHereditaryDisease() {
@@ -151,13 +154,14 @@ START me=node(${params.id})
 MATCH me-[:relatives]->fam,
 fam	-[:diseases]->d
 WITH d, count(*) AS numInstances
-ORDER BY numInstances, d.percentSurvival DESC LIMIT 5
+ORDER BY numInstances, d.percentSurvival DESC LIMIT 10
 WHERE d.percentSurvival < 50
 RETURN d
          """).collect { Disease.createInstanceForNode(it.d)}
 
 		render (view:'/disease/index', model:[diseaseInstanceList:diseaseList,diseaseInstanceCount: diseaseList.size()])
 	}
-	
+
 	//Most likely diseases contracted by users with the same symptoms
+
 }
