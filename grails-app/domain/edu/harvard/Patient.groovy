@@ -2,10 +2,6 @@ package edu.harvard
 
 class Patient {
 
-
-//	Date	dateCreated
-//	Date	lastUpdated
-	
 	String name
 	Date dateOfBirth
 	Date dateOfDeath
@@ -14,7 +10,7 @@ class Patient {
 	static	hasMany		= [symptoms:Symptom,diseases:Disease,relatives:Patient]	// tells GORM to associate other domain objects for a 1-n or n-m mapping
 
 	
-	//static mapWith = "neo4j"
+	static mapWith = "neo4j"
 	static	mapping = {
 	}
 

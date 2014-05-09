@@ -5,11 +5,7 @@ class Disease {
 	String name
 	int percentSurvival
 	
-//	Date	dateCreated
-//	Date	lastUpdated
-
-	
-	//static mapWith = "neo4j"
+	static mapWith = "neo4j"
 	static	mapping = {
 	}
 

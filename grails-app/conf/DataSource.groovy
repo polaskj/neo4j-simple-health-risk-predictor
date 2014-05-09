@@ -12,6 +12,7 @@ environments {
 				// params: optional map passed to EmbeddedGraphDatabase
 				type = "embedded"
 				//location = "data/neo4j"
+				//location = "C:/neo4j-community-1.9.7/data/graph.db"
 				// params = [:]
 
 			}
@@ -46,7 +47,7 @@ environments {
 				// ]
 
 				type = "rest"
-				location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
+				//location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
 			}
 		}
 	}

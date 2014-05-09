@@ -6,10 +6,7 @@ class Symptom {
 	String name
 	String suggestedTreatment
 
-//	Date	dateCreated
-//	Date	lastUpdated
-
-	//static mapWith = "neo4j"
+	static mapWith = "neo4j"
 	static	mapping = {
 		description widget: 'textarea'
 	}
