@@ -17,10 +17,6 @@
 		<thead>
 			<tr>
 			
-				<g:sortableColumn property="dateCreated" title="${message(code: 'disease.dateCreated.label', default: 'Date Created')}" />
-			
-				<g:sortableColumn property="lastUpdated" title="${message(code: 'disease.lastUpdated.label', default: 'Last Updated')}" />
-			
 				<g:sortableColumn property="name" title="${message(code: 'disease.name.label', default: 'Name')}" />
 			
 				<g:sortableColumn property="percentSurvival" title="${message(code: 'disease.percentSurvival.label', default: 'Percent Survival')}" />
@@ -31,11 +27,7 @@
 		<g:each in="${diseaseInstanceList}" status="i" var="diseaseInstance">
 			<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 			
-				<td><g:link action="show" id="${diseaseInstance.id}">${fieldValue(bean: diseaseInstance, field: "dateCreated")}</g:link></td>
-			
-				<td><g:formatDate date="${diseaseInstance.lastUpdated}" /></td>
-			
-				<td>${fieldValue(bean: diseaseInstance, field: "name")}</td>
+				<td><g:link action="show" id="${diseaseInstance.id}">${fieldValue(bean: diseaseInstance, field: "name")}</g:link></td>
 			
 				<td>${fieldValue(bean: diseaseInstance, field: "percentSurvival")}</td>
 			

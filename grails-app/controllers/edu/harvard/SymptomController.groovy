@@ -1,17 +1,25 @@
 package edu.harvard
 
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
+/**
+ * SymptomController
+ * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
+ */
 @Transactional(readOnly = true)
 class SymptomController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+	def index(Integer max) {
+        params.max = Math.min(max ?: 100, 100)
+        respond Symptom.list(params), model:[symptomInstanceCount: Symptom.count()]
+    }
+
+	def list(Integer max) {
+        params.max = Math.min(max ?: 100, 100)
         respond Symptom.list(params), model:[symptomInstanceCount: Symptom.count()]
     }
 

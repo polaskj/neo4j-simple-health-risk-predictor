@@ -2,19 +2,19 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: symptomInstance, field: 'name', 'error')} ">
-	<label for="name">
-		<g:message code="symptom.name.label" default="Name" />
-		
-	</label>
-	<g:textField name="name" value="${symptomInstance?.name}" />
-</div>
+			<div class="${hasErrors(bean: symptomInstance, field: 'name', 'error')} ">
+				<label for="name" class="control-label"><g:message code="symptom.name.label" default="Name" /></label>
+				<div>
+					<g:textField class='form-control' name="name" value="${symptomInstance?.name}" />
+					<span class="help-inline">${hasErrors(bean: symptomInstance, field: 'name', 'error')}</span>
+				</div>
+			</div>
 
-<div class="fieldcontain ${hasErrors(bean: symptomInstance, field: 'suggestedTreatment', 'error')} ">
-	<label for="suggestedTreatment">
-		<g:message code="symptom.suggestedTreatment.label" default="Suggested Treatment" />
-		
-	</label>
-	<g:textField name="suggestedTreatment" value="${symptomInstance?.suggestedTreatment}" />
-</div>
+			<div class="${hasErrors(bean: symptomInstance, field: 'suggestedTreatment', 'error')} ">
+				<label for="suggestedTreatment" class="control-label"><g:message code="symptom.suggestedTreatment.label" default="Suggested Treatment" /></label>
+				<div>
+					<g:textField class='form-control' name="suggestedTreatment" value="${symptomInstance?.suggestedTreatment}" />
+					<span class="help-inline">${hasErrors(bean: symptomInstance, field: 'suggestedTreatment', 'error')}</span>
+				</div>
+			</div>
 
