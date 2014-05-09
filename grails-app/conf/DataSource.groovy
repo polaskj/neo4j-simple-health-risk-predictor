@@ -46,7 +46,7 @@ environments {
 				// ]
 
 				type = "rest"
-				location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
+				//location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
 			}
 		}
 	}
