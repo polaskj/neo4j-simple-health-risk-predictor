@@ -14,8 +14,7 @@ class PatientController {
 	static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def index(Integer max) {
-		params.max = Math.min(max ?: 100, 100)
-		respond Patient.list(params), model:[patientInstanceCount: Patient.count()]
+		redirect action:'list', params:params
 	}
 
 	def list(Integer max) {
@@ -29,7 +28,7 @@ class PatientController {
 		def otherPatientsWithSymptoms = Patient.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom<-[:symptoms]-others
-WITH others, count(DISTINCT others) AS numInstances
+WITH others, count(DISTINCT commonSymptom) AS numInstances
 ORDER BY numInstances DESC LIMIT 5
 RETURN others
          """).collect { Patient.createInstanceForNode(it.others)}
@@ -37,16 +36,16 @@ RETURN others
 
 
 		//Answers the question: Find diseases where others displayed same symptoms
-		 def diseaseSameSymptomsList = Disease.cypherStatic("""
+		def diseaseSameSymptomsList = Disease.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom,
 commonSymptom<-[:symptoms]-others-[:diseases]-dis
-WITH dis, count(DISTINCT dis) AS numInstances
+WITH dis, count(DISTINCT commonSymptom) AS numInstances
 ORDER BY numInstances, dis.percentSurvival DESC LIMIT 5
 RETURN dis
          """).collect {Disease.createInstanceForNode(it.dis)}
 
-		//Answers the question: Find top 5 hereditary diseases which are deadly 
+		//Answers the question: Find top 5 hereditary diseases which are deadly
 		def likelyHereditaryDiseases = Disease.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:relatives]->fam,
@@ -154,6 +153,25 @@ RETURN d
 			}
 			'*'{ render status: NOT_FOUND }
 		}
+	}
+
+
+	def search(){
+		//http://projects.spring.io/grails-data-mapping/neo4j/manual/ref/Additional%20Gorm%20Methods/cypherStatic.html
+
+		//Created pull request
+		//https://jira.grails.org/browse/GPNEO4J-13?jql=project%20%3D%20GPNEO4J%20AND%20reporter%20%3D%20currentUser()
+		//Docs below are out of date
+		//http://projects.spring.io/grails-data-mapping/neo4j/manual/ref/Additional%20Gorm%20Methods/cypherStatic.html
+		
+		def patientInstanceList = Patient.cypherStatic("""
+start n=node({this}) match n-[:SUBSUBREFERENCE]-m, m-[:INSTANCE]-i where i.name=~'${params.query}' return i;
+         """).collect {Patient.createInstanceForNode(it.i)}
+
+
+		render view:'/patient/list', model:[patientInstanceList:patientInstanceList,patientInstanceCount:patientInstanceList.size()]
+
+
 	}
 
 

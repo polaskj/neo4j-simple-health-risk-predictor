@@ -12,6 +12,7 @@ class Patient {
 	
 	static mapWith = "neo4j"
 	static	mapping = {
+		name index: 'name_idx'
 	}
 
 	static	constraints = {
