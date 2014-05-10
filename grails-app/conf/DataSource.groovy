@@ -10,11 +10,12 @@ environments {
 				// options:
 				// location: the path where Neo4j is stored, defaults to "data/neo4j"
 				// params: optional map passed to EmbeddedGraphDatabase
-				type = "embedded"
+//				type = "embedded"
 				//location = "data/neo4j"
 				//location = "C:/neo4j-community-1.9.7/data/graph.db"
 				// params = [:]
-
+				type="rest"
+				location = "http://localhost:7474/db/data"
 			}
 		}
 	}
@@ -46,12 +47,8 @@ environments {
 				//    ha.coordinators = " localhost:2181,localhost:2182,localhost:2183"
 				// ]
 
-				//				type = "rest"
+				type = "rest"
 				//location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
-
-
-
-				type = "embedded"
 			}
 		}
 	}
