@@ -30,30 +30,29 @@ class PatientController {
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom<-[:symptoms]-others
 WITH others, count(DISTINCT others) AS numInstances
-ORDER BY numInstances DESC LIMIT 10
+ORDER BY numInstances DESC LIMIT 5
 RETURN others
          """).collect { Patient.createInstanceForNode(it.others)}
 
 
 
 		//Answers the question: Find diseases where others displayed same symptoms
-		def diseaseSameSymptomsList = Disease.cypherStatic("""
+		 def diseaseSameSymptomsList = Disease.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom,
 commonSymptom<-[:symptoms]-others-[:diseases]-dis
 WITH dis, count(DISTINCT dis) AS numInstances
-ORDER BY numInstances, dis.percentSurvival DESC LIMIT 10
+ORDER BY numInstances, dis.percentSurvival DESC LIMIT 5
 RETURN dis
-         """).collect { Disease.createInstanceForNode(it.dis)}
+         """).collect {Disease.createInstanceForNode(it.dis)}
 
-
-		//Answers the question: Find top 5 hereditary diseases which are deadly (2 degrees)
+		//Answers the question: Find top 5 hereditary diseases which are deadly 
 		def likelyHereditaryDiseases = Disease.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:relatives]->fam,
 fam	-[:diseases]->d
 WITH d, count(DISTINCT d) AS numInstances
-ORDER BY numInstances, d.percentSurvival DESC LIMIT 10
+ORDER BY numInstances, d.percentSurvival DESC LIMIT 5
 WHERE d.percentSurvival < 50
 RETURN d
          """).collect { Disease.createInstanceForNode(it.d)}
@@ -62,13 +61,6 @@ RETURN d
 		respond patientInstance,model:[otherPatientsWithSymptoms:otherPatientsWithSymptoms,diseaseSameSymptomsList:diseaseSameSymptomsList,likelyHereditaryDiseases:likelyHereditaryDiseases]
 	}
 
-	def test (){
-		 def me = Patient.findByName("Jon")
-		 def bob = Patient.findByName("Bob")
-		 me.relatives += [bob]
-		 me.save()
-render "Test"
-	}
 	def create() {
 		respond new Patient(params)
 	}

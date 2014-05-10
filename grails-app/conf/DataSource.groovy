@@ -46,8 +46,12 @@ environments {
 				//    ha.coordinators = " localhost:2181,localhost:2182,localhost:2183"
 				// ]
 
-				type = "rest"
+				//				type = "rest"
 				//location = System.getenv('NEO4J_REST_URL') ?: "http://localhost:7474/db/data/"
+
+
+
+				type = "embedded"
 			}
 		}
 	}

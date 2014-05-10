@@ -92,6 +92,9 @@
 
 				</tr>
 
+<tr><td colspan="2"><strong>Advanced Graph Relationships</strong></td>
+
+
 				<tr class="prop">
 					<td valign="top" class="name"><g:message
 							code="patient.symptoms.label"
@@ -112,7 +115,7 @@
 				<tr class="prop">
 					<td valign="top" class="name"><g:message
 							code="patient.symptoms.label"
-							default="Diseases linked to person's symptoms" /></td>
+							default="Diseases most closely linked to patient's symptoms" /></td>
 
 					<td valign="top" style="text-align: left;" class="value">
 						<ul>
@@ -129,7 +132,7 @@
 					<tr class="prop">
 					<td valign="top" class="name"><g:message
 							code="patient.symptoms.label"
-							default="Deadly Hereditary Diseases" /></td>
+							default="Deadly Hereditary Diseases (listed by most occurances in family)" /></td>
 
 					<td valign="top" style="text-align: left;" class="value">
 						<ul>
