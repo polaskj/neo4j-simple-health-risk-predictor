@@ -29,6 +29,8 @@ class PatientController {
 		def otherPatientsWithSymptoms = Patient.cypherStatic("""
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom<-[:symptoms]-others
+WITH others, count(DISTINCT others) AS numInstances
+ORDER BY numInstances DESC LIMIT 10
 RETURN others
          """).collect { Patient.createInstanceForNode(it.others)}
 
@@ -39,7 +41,7 @@ RETURN others
 START me=node(${params.id})
 MATCH me-[:symptoms]->commonSymptom,
 commonSymptom<-[:symptoms]-others-[:diseases]-dis
-WITH dis, count(*) AS numInstances
+WITH dis, count(DISTINCT dis) AS numInstances
 ORDER BY numInstances, dis.percentSurvival DESC LIMIT 10
 RETURN dis
          """).collect { Disease.createInstanceForNode(it.dis)}
@@ -50,7 +52,7 @@ RETURN dis
 START me=node(${params.id})
 MATCH me-[:relatives]->fam,
 fam	-[:diseases]->d
-WITH d, count(*) AS numInstances
+WITH d, count(DISTINCT d) AS numInstances
 ORDER BY numInstances, d.percentSurvival DESC LIMIT 10
 WHERE d.percentSurvival < 50
 RETURN d
@@ -60,6 +62,13 @@ RETURN d
 		respond patientInstance,model:[otherPatientsWithSymptoms:otherPatientsWithSymptoms,diseaseSameSymptomsList:diseaseSameSymptomsList,likelyHereditaryDiseases:likelyHereditaryDiseases]
 	}
 
+	def test (){
+		 def me = Patient.findByName("Jon")
+		 def bob = Patient.findByName("Bob")
+		 me.relatives += [bob]
+		 me.save()
+render "Test"
+	}
 	def create() {
 		respond new Patient(params)
 	}
