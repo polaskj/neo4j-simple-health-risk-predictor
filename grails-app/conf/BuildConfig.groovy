@@ -72,7 +72,7 @@ grails.project.dependency.resolution = {
 		//runtime (group:"org.neo4j", name:"neo4j-shell", version:""1.8.M07")
 
 		// uncomment following line if type=rest is used in DataSource.groovy
-		runtime "org.neo4j:neo4j-rest-graphdb:1.9"
+		runtime "org.neo4j:neo4j-rest-graphdb:2.0.1"
 
 		test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
 	}
