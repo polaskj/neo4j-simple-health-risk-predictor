@@ -18,7 +18,7 @@ class BootStrap {
 //
 //		//Generate diseases
 //		(0..25).each{
-//			if (!Disease.findByName("Patient$it")){
+//			if (!Disease.findByName("Disease$it")){
 //				//Equiv to Cypher statement:
 //				//CREATE (n {name:"Disease1",percentSurvival:50})
 //				new Disease(name:"Disease$it",percentSurvival:rand.nextInt(100)).save(flush:true)
@@ -27,7 +27,7 @@ class BootStrap {
 //
 //		//Generate symptoms
 //		(0..50).each{
-//			if (!Symptom.findByName("Patient$it")){
+//			if (!Symptom.findByName("Symptom$it")){
 //				new Symptom(name:"Symptom$it",suggestedTreatment:rand.nextInt(max)).save(flush:true)
 //			}
 //		}
