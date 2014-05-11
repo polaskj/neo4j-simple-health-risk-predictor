@@ -52,7 +52,7 @@ grails.project.dependency.resolution = {
 		mavenRepo 'http://m2.neo4j.org/releases'
 	}
 
-	neo4jVerison="2.0.0-M01"
+	neo4jVerison="1.8.3"
 	dependencies {
 
 		compile("org.neo4j:neo4j-community:$neo4jVerison")
@@ -72,13 +72,13 @@ grails.project.dependency.resolution = {
 		//runtime (group:"org.neo4j", name:"neo4j-shell", version:""1.8.M07")
 
 		// uncomment following line if type=rest is used in DataSource.groovy
-		runtime "org.neo4j:neo4j-rest-graphdb:2.0.1"
+		runtime "org.neo4j:neo4j-rest-graphdb:1.9"
 
 		test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
 	}
 
 	plugins {
-		compile ":neo4j:1.1.1"
+		compile ":neo4j:1.1.2"
 		runtime ":jquery:1.10.2.2"
 		runtime ":resources:1.2.1"
 		test(":spock:0.7") { exclude "spock-grails-support" }
