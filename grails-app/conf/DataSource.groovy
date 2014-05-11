@@ -47,7 +47,7 @@ environments {
 				// ]
 
 				type = "rest"
-				location = "http://localhost:7474/db/data/"
+				//location = "http://localhost:7474/db/data/"
 			}
 		}
 	}
