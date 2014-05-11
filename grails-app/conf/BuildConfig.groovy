@@ -52,7 +52,7 @@ grails.project.dependency.resolution = {
 		mavenRepo 'http://m2.neo4j.org/releases'
 	}
 
-	neo4jVerison="1.8.3"
+	neo4jVerison="1.9.6"
 	dependencies {
 
 		compile("org.neo4j:neo4j-community:$neo4jVerison")
@@ -78,7 +78,7 @@ grails.project.dependency.resolution = {
 	}
 
 	plugins {
-		compile ":neo4j:1.1.2"
+		compile ":neo4j:1.1.1"
 		runtime ":jquery:1.10.2.2"
 		runtime ":resources:1.2.1"
 		test(":spock:0.7") { exclude "spock-grails-support" }
