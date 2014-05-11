@@ -46,8 +46,11 @@ environments {
 				//    ha.coordinators = " localhost:2181,localhost:2182,localhost:2183"
 				// ]
 
-				type = "rest"
+//				type = "rest"
 				//location = "http://localhost:7474/db/data/"
+				
+				type = "rest"
+				location = System.env['GRAPHENEDB_URL'] ?: "http://localhost:7474/db/data/"
 			}
 		}
 	}
