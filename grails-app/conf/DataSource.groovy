@@ -51,7 +51,7 @@ environments {
 				
 				type = "rest"
 //				location = System.env['GRAPHENEDB_URL']// ?: "http://localhost:7474/db/data/"
-				location = System.env['NEO4J_URL']// ?: "http://localhost:7474/db/data/"
+				location = "http://test:d7YC41V5GSv3SgG6fFcd@test.sb02.stations.graphenedb.com:24789"// ?: "http://localhost:7474/db/data/"
 			}
 		}
 	}
